@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @document.name
+%p
+  %b Code:
+  = @document.code
+%p
+  %b Revision:
+  = @document.revision
+%p
+  %b Revision date:
+  = @document.revision_date
+%p
+  %b Document type:
+  = @document.document_type
+%p
+  %b Department:
+  = @document.department
+
+= link_to 'Edit', edit_document_path(@document)
+\|
+= link_to 'Back', documents_path

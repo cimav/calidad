@@ -1,0 +1,31 @@
+%h1 Listing documents
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Code
+      %th Revision
+      %th Revision date
+      %th Document type
+      %th Department
+      %th
+      %th
+      %th
+
+  %tbody
+    - @documents.each do |document|
+      %tr
+        %td= document.name
+        %td= document.code
+        %td= document.revision
+        %td= document.revision_date
+        %td= document.document_type
+        %td= document.department
+        %td= link_to 'Show', document
+        %td= link_to 'Edit', edit_document_path(document)
+        %td= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Document', new_document_path
