@@ -52,3 +52,12 @@ production:
   database: calidad_production
   username: calidad
   password: <%= ENV['CALIDAD_DATABASE_PASSWORD'] %>
+
+production_cimavnetmultix:
+  adapter: mysql2
+  host: 10.0.0.13
+  encoding: utf8
+  pool: 5
+  username: netmultix
+  password: N3tMult1x@CIMAV
+  database: cimavnetmultix
