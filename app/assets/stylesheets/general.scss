@@ -1,6 +1,6 @@
 $color-menu: #052D3E;
 $color-background: #F3F3F3;
-$color-icons: #868686;
+$color-menu-active: rgba(127, 127, 127, 0.58);
 $color-icons-lighter: #eceeeb;
 
 body{
@@ -52,6 +52,9 @@ ul.collection{
 
 .navbar{
   background-color: $color-menu;
+  ul li.active{
+    background-color: $color-menu-active;
+  }
 }
 
 .card .card-content .card-title{
