@@ -15,7 +15,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
-  socket: /var/run/mysqld/mysqld.sock
+  #socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
@@ -52,3 +52,12 @@ production:
   database: calidad_production
   username: calidad
   password: <%= ENV['CALIDAD_DATABASE_PASSWORD'] %>
+
+production_cimavnetmultix:
+  adapter: mysql2
+  host: 10.0.0.13
+  encoding: utf8
+  pool: 5
+  username: netmultix
+  password: N3tMult1x@CIMAV
+  database: cimavnetmultix
