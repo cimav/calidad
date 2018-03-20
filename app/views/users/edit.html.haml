@@ -4,7 +4,7 @@
       .col.s12.m12.l12
         =link_to users_path, class:'breadcrumb' do
           Usuarios
-        %a.breadcrumb{user_path}
+        %a.breadcrumb{href:user_path}
           =@user.name
         %a.breadcrumb{}
           Editar

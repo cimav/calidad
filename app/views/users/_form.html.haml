@@ -1,22 +1,20 @@
-= form_for @user do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      %ul
-        - @user.errors.full_messages.each do |message|
-          %li= message
+.row
+  = form_for @user , class:'s12' do |f|
+    - if @user.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+        %ul
+          - @user.errors.full_messages.each do |message|
+            %li= message
 
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :status
-    = f.number_field :status
-  .field
-    = f.label :user_type
-    = f.number_field :user_type
-  .actions
-    = f.submit 'Save'
+    .row
+      .input-field.col.s12.m6
+        = f.label :name, 'Nombre'
+        = f.text_field :name
+      .input-field.col.s12.m6
+        = f.label :email
+        = f.text_field :email
+    .row
+      %button.btn-floating.btn-large.green.darken-2.right.tooltipped{'data-tooltip':'Guardar', 'data-position':'right', 'data-delay':40, type:'submit'}
+        %i.material-icons
+          done
