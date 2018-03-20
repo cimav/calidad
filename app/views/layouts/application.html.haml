@@ -20,6 +20,10 @@
               %a{:href => "/"} Documentos
             %li{class:active_class('/users')}
               %a{:href => "/users"} Usuarios
+            %li
+              %a{:href => "/logout"}
+                %i.material-icons
+                  exit_to_app
           %ul#mobile-nav.side-nav
             %li
               %a{:href => "/"} Documentos
@@ -29,3 +33,11 @@
     %main
       .container
         = yield
+
+/ Mensajes
+-if alert
+  -alert.each do |error|
+    :javascript
+      Materialize.toast("#{error}", 4500, 'orange darken-4')
+:javascript
+      Materialize.toast("#{notice}", 3000)
