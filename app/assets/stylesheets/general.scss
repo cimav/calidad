@@ -1,0 +1,73 @@
+$color-menu: #06354b;
+$color-background: #F3F3F3;
+$color-icons: #868686;
+$color-icons-lighter: #eceeeb;
+
+body{
+  background-color: $color-background;
+}
+
+.no-link{
+  color: inherit;
+}
+.config-breadcrumb {
+  background: none;
+  border: none;
+  .breadcrumb {
+    color: #2196f3 !important;
+    font-size: 150% !important;
+    &:before {
+      font-size: 150% !important;
+      color: #666 !important;
+    }
+    &:last-of-type{
+      color: #7a7a7a !important;
+    }
+  }
+}
+
+ul.collection{
+  .collection-item{
+    color: inherit !important;}
+}
+
+.tr-click{
+  cursor: pointer;
+}
+
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+.picker__weekday-display{
+  background-color: black;
+}
+
+.picker__date-display{
+  background-color: #212121 !important;
+}
+
+.nav-wrapper{
+  background-color: $color-menu;
+}
+
+.card .card-content .card-title{
+  color: #265e84;
+  font-size: 160%;
+  margin-bottom: 1.5em !important;
+}
+
+a.navbar-logo{
+  padding: 0 !important;
+}
+
+.red-hover:hover{
+  color:#f44336
+}
+.blue-hover:hover{
+  color:#2196f3
+}
+

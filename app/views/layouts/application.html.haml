@@ -7,4 +7,23 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = yield
+    %header
+      %nav
+        .nav-wrapper
+          %a.brand-logo{:href => "#!"} Calidad
+          %a.button-collapse{"data-activates" => "mobile-demo", :href => "#"}
+            %i.material-icons menu
+          %ul.right.hide-on-med-and-down
+            %li
+              %a{:href => "/documents"} Documentos
+            %li
+              %a{:href => "/users"} Usuarios
+          %ul#mobile-demo.side-nav
+            %li
+              %a{:href => "/documents"} Documentos
+            %li
+              %a{:href => "/users"} Usuarios
+
+    %main
+      .container
+        = yield
