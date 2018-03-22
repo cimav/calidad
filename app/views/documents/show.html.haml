@@ -1,24 +1,27 @@
-%p#notice= notice
+%nav.config-breadcrumb.z-depth-0
+  .nav-wrapper
+    .row
+      .col.s12.m12.l12
+        =link_to documents_path, class:'breadcrumb' do
+          Documentos
+        %a.breadcrumb{}
+          =@document.name
 
 %p
-  %b Name:
+  %b Nombre:
   = @document.name
 %p
-  %b Code:
+  %b Código:
   = @document.code
 %p
-  %b Revision:
+  %b Revisión:
   = @document.revision
 %p
-  %b Revision date:
+  %b Fecha de última revisión:
   = @document.revision_date
 %p
-  %b Document type:
-  = @document.document_type
+  %b Tipo de documento:
+  = @document.get_document_type
 %p
-  %b Department:
-  = @document.department
-
-= link_to 'Edit', edit_document_path(@document)
-\|
-= link_to 'Back', documents_path
+  %b Departmento:
+  = @document.department.name

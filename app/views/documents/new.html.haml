@@ -1,5 +1,12 @@
-%h1 New document
+%nav.config-breadcrumb.z-depth-0
+  .nav-wrapper
+    .row
+      .col.s12.m12.l12
+        =link_to documents_path, class:'breadcrumb' do
+          Documentos
+        %a.breadcrumb{}
+          Nuevo
 
+%h1 Nuevo documento
 = render 'form'
 
-= link_to 'Back', documents_path

@@ -7,22 +7,23 @@
           %li= message
 
   .field
-    = f.label :name
+    = f.label :name, 'Nombre'
     = f.text_field :name
   .field
-    = f.label :code
+    = f.label :code, 'Código'
     = f.text_field :code
   .field
-    = f.label :revision
+    = f.label :revision, 'Revisión'
     = f.text_field :revision
   .field
-    = f.label :revision_date
-    = f.date_select :revision_date
+    = f.label :revision_date, 'Fecha de revisión'
+    =f.text_field :revision_date, class: "datepicker",placeholder:'Selecciona la fecha de término', type:'date'
   .field
-    = f.label :document_type
-    = f.number_field :document_type
+    = f.label :document_type, 'Tipo de documento'
+    = f.select :document_type, Document::DOCUMENT_TYPES.invert
   .field
-    = f.label :department
-    = f.text_field :department
+    = f.label :department_id, 'Departamento'
+    = f.collection_select(:department_id, Department.all, :id, :name)
   .actions
     = f.submit 'Save'
+

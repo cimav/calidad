@@ -9,26 +9,36 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body
-    %header
-      %nav
-        .nav-wrapper.navbar
-          %a.brand-logo{:href => "#!"} Calidad
-          %a.button-collapse{"data-activates" => "mobile-nav", :href => "#"}
-            %i.material-icons menu
-          %ul.right.hide-on-med-and-down
-            %li{class:"#{active_class('/documents')} #{'active' if request.path.eql?'/'}"}
-              %a{:href => "/"} Documentos
-            %li{class:active_class('/users')}
-              %a{:href => "/users"} Usuarios
-            %li
-              %a{:href => "/logout"}
-                %i.material-icons
-                  exit_to_app
-          %ul#mobile-nav.side-nav
-            %li
-              %a{:href => "/"} Documentos
-            %li
-              %a{:href => "/users"} Usuarios
+    %ul#slide-out.side-nav.fixed
+      %li
+        .user-view
+          .background
+            = image_tag "cimav1.png"
+          %a{:href => "#!user"}
+            %img.circle{:src => "http://cimav.edu.mx/foto/paulina.sandoval/500"}/
+          %a{:href => "#!name"}
+            %span.white-text.name
+              =current_user.name
+          %a{:href => "#!email"}
+            %span.white-text.email
+              =current_user.email
+      %li
+        %a.subheader Departamentos
+      -Department.all.each do |department|
+        %li
+          %a{:href => "#!"}
+            %i.material-icons> work
+            =department.name
+      %li
+        .divider
+      %li
+        %a{href:'/logout'}
+          %i.material-icons> exit_to_app
+          Cerrar sesión
+    %a.button-collapse{"data-activates" => "slide-out", :href => "#"}
+      %i.material-icons menu
+
+
 
     %main
       .container

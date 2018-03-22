@@ -1,31 +1,11 @@
-%h1 Listing documents
-
-%table
-  %thead
-    %tr
-      %th Name
-      %th Code
-      %th Revision
-      %th Revision date
-      %th Document type
-      %th Department
-      %th
-      %th
-      %th
-
-  %tbody
-    - @documents.each do |document|
-      %tr
-        %td= document.name
-        %td= document.code
-        %td= document.revision
-        %td= document.revision_date
-        %td= document.document_type
-        %td= document.department
-        %td= link_to 'Show', document
-        %td= link_to 'Edit', edit_document_path(document)
-        %td= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Document', new_document_path
+%ul.collection.documents-list
+  -@documents.each do |document|
+    =link_to document do
+      %li.collection-item.avatar
+        %i.material-icons.circle
+          insert_drive_file
+        %span.title=document.name
+        %p.grey-text
+          ="#{document.code}-#{document.revision}"
+          %br/
+          =document.revision_date

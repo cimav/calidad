@@ -1,7 +1,16 @@
-%h1 Editing document
+%nav.config-breadcrumb.z-depth-0
+  .nav-wrapper
+    .row
+      .col.s12.m12.l12
+        =link_to documents_path, class:'breadcrumb' do
+          Documentos
+        =link_to document_path, class:'breadcrumb' do
+          =@document.name
+        %a.breadcrumb{}
+          Editar
+
+%h1 Editar Documento
 
 = render 'form'
 
-= link_to 'Show', @document
-\|
-= link_to 'Back', documents_path
+
