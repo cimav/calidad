@@ -1,0 +1,32 @@
+%h3
+  =@department.name
+  %button.btn-floating.right.green.darken-2.tooltipped{'data-tooltip':'Nuevo documento','data-delay':40,'data-position':'right',onclick:"openModal($('#new_document_modal'));"}
+    %i.material-icons
+      add
+
+%ul.collection.documents-list
+  -@documents.each do |document|
+    %li.collection-item.avatar
+      %i.material-icons.circle
+        insert_drive_file
+      %span.title=document.name
+      %p.grey-text
+        ="#{document.code}-#{document.revision}"
+        %br/
+        =document.revision_date
+      %a.secondary-content{onclick:"openEditModal(#{document.id});"}
+        %i.material-icons
+          edit
+    .divider
+
+
+
+#new_document_modal.modal
+  .modal-content
+    %h4.center Nuevo documento
+    =render partial: 'form', locals:{document:Document.new, department:@department}
+
+#edit_document_modal.modal
+  .modal-content
+    %h4.center Editar documento
+    #edit_document_content

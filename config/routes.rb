@@ -10,5 +10,8 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
   get '/logout' => 'sessions#destroy'
 
+  ########################################## Documentos
+  get '/:department_name/documentos' => 'documents#index_by_department'
+
 
 end

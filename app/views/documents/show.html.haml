@@ -2,8 +2,8 @@
   .nav-wrapper
     .row
       .col.s12.m12.l12
-        =link_to documents_path, class:'breadcrumb' do
-          Documentos
+        =link_to "/#{@department.name.downcase}/documentos", class:'breadcrumb' do
+          =@department.name
         %a.breadcrumb{}
           =@document.name
 

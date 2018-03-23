@@ -4,21 +4,29 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
+    department = Department.first
+    redirect_to "/#{department.name.downcase}/documentos"
   end
 
   # GET /documents/1
   # GET /documents/1.json
   def show
+    @department = @document.department
+  end
+
+  def index_by_department
+    @department = Department.find_by_name(params[:department_name])
+    @documents = @department.documents
   end
 
   # GET /documents/new
   def new
-    @document = Document.new
   end
 
   # GET /documents/1/edit
   def edit
+    @department = @document.department
+    render layout:false
   end
 
   # POST /documents
@@ -28,10 +36,10 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
-        format.html { redirect_to @document, notice: 'Document was successfully created.' }
+        format.html { redirect_to "/#{@document.department.name.downcase}/documentos", notice: 'Documento creado' }
         format.json { render :show, status: :created, location: @document }
       else
-        format.html { render :new }
+        format.html { render :new, alert:@document.errors }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
@@ -42,7 +50,7 @@ class DocumentsController < ApplicationController
   def update
     respond_to do |format|
       if @document.update(document_params)
-        format.html { redirect_to @document, notice: 'Document was successfully updated.' }
+        format.html { redirect_to "/#{@document.department.name.downcase}/documentos", notice: 'Documento actualizado' }
         format.json { render :show, status: :ok, location: @document }
       else
         format.html { render :edit }

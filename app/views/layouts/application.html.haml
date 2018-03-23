@@ -25,8 +25,8 @@
       %li
         %a.subheader Departamentos
       -Department.all.each do |department|
-        %li
-          %a{:href => "#!"}
+        %li{class:"#{active_class(department.name.downcase)}"}
+          %a.waves-effect{:href => "/#{department.name.downcase}/documentos"}
             %i.material-icons> work
             =department.name
       %li

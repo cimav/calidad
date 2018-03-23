@@ -1,16 +1,1 @@
-%nav.config-breadcrumb.z-depth-0
-  .nav-wrapper
-    .row
-      .col.s12.m12.l12
-        =link_to documents_path, class:'breadcrumb' do
-          Documentos
-        =link_to document_path, class:'breadcrumb' do
-          =@document.name
-        %a.breadcrumb{}
-          Editar
-
-%h1 Editar Documento
-
-= render 'form'
-
-
+=render partial: 'form', locals:{document:@document, department:@department}

@@ -1,3 +1,8 @@
+{defer, dispatch} = Turbolinks
+
+handleEvent = (eventName, handler) ->
+  document.addEventListener(eventName, handler, false)
+
 translateEvent = ({from, to}) ->
   handler = (event) ->
     event = dispatch(to, target: event.target, cancelable: event.cancelable, data: event.data)
