@@ -30,8 +30,12 @@ function openModal(modal){
 
 function openEditModal(document_id){
     $('#edit_document_modal').modal('open');
-    $.get( "/documents/"+document_id+"/edit", function( data ) {
-        $('#edit_document_content').html(data);
-    });
+    $('#edit_preloader').show();
+    $('#edit_document_content').html('');
 
+    $.get( "/documents/"+document_id+"/edit")
+        .done(function( data ) {
+            $('#edit_preloader').hide();
+            $('#edit_document_content').html(data);
+        });
 }
