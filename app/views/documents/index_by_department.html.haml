@@ -24,11 +24,11 @@
           %a.btn-floating.grey.right.purple-hover{onclick:"openNewReminderModal(#{document.id});"}
             %i.material-icons
               add_alert
-      -if document.document_owners.size > 0
-        .row
-          -document.document_owners.each do |document_owner|
-            %i.material-icons.tooltipped{'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
-              notifications
+        .col.s12.reminders
+          -if document.document_owners.size > 0
+            -document.document_owners.each do |document_owner|
+              %i.material-icons.tooltipped.brown-text.text-lighten-3.pointer-cursor{'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
+                notifications
 
 
 
@@ -69,7 +69,7 @@
 
 #edit_reminder_modal.modal
   .modal-content
-    %h4.center Asignar recordatorio
+    %h4.center Editar recordatorio
     .center-align
       #edit_reminder_preloader.preloader-wrapper.big.active
         .spinner-layer.spinner-blue-only
