@@ -1,0 +1,14 @@
+=form_for @document_owner, url:"/document_owners/#{@document_owner.id}/update" do |f|
+  .row
+    .input-field.col.s12.m6
+      = f.label :owner_name, 'Nombre'
+      = f.text_field :owner_name, required:true
+    .input-field.col.s12.m6
+      = f.label :owner_email, 'Email'
+      = f.text_field :owner_email, type:'email', required:true
+  .row
+    .col.s12
+      =f.submit 'Guardar', class:'btn btn-large purple right'
+
+:javascript
+  Materialize.updateTextFields();

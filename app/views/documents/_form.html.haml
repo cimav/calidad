@@ -26,13 +26,14 @@
         = f.label :document_type, 'Tipo de documento', class:'active'
         = f.select :document_type, Document::DOCUMENT_TYPES.invert
       = f.hidden_field :department_id, value:department.id
+
     .row
       .col.s12
         =f.submit 'Guardar', class:'btn btn-large purple right'
 
 :javascript
   $('select').material_select();
-  Materialize.updateTextFields();
+  //Materialize.updateTextFields();
    $('.datepicker').pickadate({
 
         selectMonths: true, // Creates a dropdown to control month
@@ -58,5 +59,7 @@
         // Today and clear
         today: 'Hoy',
         clear: 'Limpiar',
-        close: 'Cerrar'
+        close: 'Cerrar',
+
+        format: 'yyyy-mm-dd'
     });

@@ -3,21 +3,32 @@
   %button.btn-floating.right.green.darken-2.tooltipped{'data-tooltip':'Nuevo documento','data-delay':40,'data-position':'right',onclick:"openModal($('#new_document_modal'));"}
     %i.material-icons
       add
-
-%ul.collection.documents-list
+.row
   -@documents.each do |document|
-    %li.collection-item.avatar
-      %i.material-icons.circle
-        insert_drive_file
-      %span.title=document.name
-      %p.grey-text
-        ="#{document.code}-#{document.revision}"
-        %br/
-        =document.revision_date
-      %a.secondary-content{onclick:"openEditModal(#{document.id});"}
-        %i.material-icons
-          edit
-    .divider
+
+    .card-panel.documents-list
+      .row
+        .col.s5.m2.match-height
+          %i.material-icons.large.grey-text
+            insert_drive_file
+        .col.s7.m7.match-height
+          =document.name
+          %br
+          ="#{document.code}-#{document.revision}"
+          %br
+          =document.revision_date
+        .col.s12.m3.match-height
+          %a.btn-floating.grey.right.blue-hover{onclick:"openEditModal(#{document.id});"}
+            %i.material-icons
+              edit
+          %a.btn-floating.grey.right.purple-hover{onclick:"openNewReminderModal(#{document.id});"}
+            %i.material-icons
+              add_alert
+      -if document.document_owners.size > 0
+        .row
+          -document.document_owners.each do |document_owner|
+            %i.material-icons.tooltipped{'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
+              notifications
 
 
 
@@ -40,3 +51,44 @@
             .circle
 
     #edit_document_content
+
+#new_reminder_modal.modal
+  .modal-content
+    %h4.center Asignar recordatorio
+    .center-align
+      #new_reminder_preloader.preloader-wrapper.big.active
+        .spinner-layer.spinner-blue-only
+          .circle-clipper.left
+            .circle
+          .gap-patch
+            .circle
+          .circle-clipper.right
+            .circle
+
+    #new_reminder_content
+
+#edit_reminder_modal.modal
+  .modal-content
+    %h4.center Asignar recordatorio
+    .center-align
+      #edit_reminder_preloader.preloader-wrapper.big.active
+        .spinner-layer.spinner-blue-only
+          .circle-clipper.left
+            .circle
+          .gap-patch
+            .circle
+          .circle-clipper.right
+            .circle
+
+    #edit_reminder_content
+
+:javascript
+   $(document).ready(function(){
+  ///////////////////////////// Función para hacer todos los divs del mismo tamaño
+      $('.match-height').matchHeight({
+          byRow: true,
+          property: 'height',
+          target: null,
+          remove: false
+      });
+    });

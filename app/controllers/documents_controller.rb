@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :new_reminder, :create_reminder]
 
   # GET /documents
   # GET /documents.json
@@ -67,6 +67,50 @@ class DocumentsController < ApplicationController
       format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def new_reminder
+    @document_owner = DocumentOwner.new
+    render layout: false
+  end
+
+  def edit_reminder
+    @document_owner = DocumentOwner.find(params[:id])
+    render layout: false
+  end
+
+  def create_reminder
+    document_owner = @document.document_owners.new
+    document_owner.owner_name = params[:document_owner][:owner_name]
+    document_owner.owner_email = params[:document_owner][:owner_email]
+
+    respond_to do |format|
+      if document_owner.save
+        format.html { redirect_to "/#{@document.department.name.downcase}/documentos", notice: 'Recordatorio creado' }
+        format.json { render :show, status: :ok, location: @document }
+      else
+        format.html { render :edit }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
+  def update_reminder
+    document_owner = DocumentOwner.find(params[:id])
+    document_owner.owner_name = params[:document_owner][:owner_name]
+    document_owner.owner_email = params[:document_owner][:owner_email]
+
+    respond_to do |format|
+      if document_owner.save
+        format.html { redirect_to "/#{document_owner.document.department.name.downcase}/documentos", notice: 'Recordatorio actualizado' }
+        format.json { render :show, status: :ok, location: @document }
+      else
+        format.html { render :edit }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
 
   private
