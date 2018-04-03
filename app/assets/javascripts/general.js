@@ -71,3 +71,19 @@ function openEditReminderModal(document_owner_id){
             $('#edit_reminder_content').html(data);
         });
 }
+
+function autoCompleteEmail(name){
+    $.ajax({
+        url: "/get_email",
+        data: {nombre:name},
+        cache: true,
+        success: function(data){
+            email = data;
+            console.log(email);
+            $('#email_reminder_input').val(email);
+            Materialize.updateTextFields();
+        }
+    });
+
+
+}

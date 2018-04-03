@@ -2,13 +2,29 @@
   .row
     .input-field.col.s12.m6
       = f.label :owner_name, 'Nombre'
-      = f.text_field :owner_name, required:true
+      = f.text_field :owner_name, required:true, autocomplete:"off", class:'autocomplete'
     .input-field.col.s12.m6
       = f.label :owner_email, 'Email'
-      = f.text_field :owner_email, type:'email', required:true
+      = f.text_field :owner_email, type:'email', required:true, id:'email_reminder_input'
   .row
     .col.s12
       =f.submit 'Guardar', class:'btn btn-large purple right'
 
 :javascript
+  $(document).ready(function(){
   Materialize.updateTextFields();
+    $.ajax({
+      url: "/get_personas",
+      cache: true,
+      success: function(data){
+        $('input.autocomplete').autocomplete({
+          data: data,
+          onAutocomplete: function(val) {
+            autoCompleteEmail(val);
+          },
+           limit: 5 // The max amount of results that can be shown at once. Default: Infinity.
+
+        });
+      }
+    });
+  });

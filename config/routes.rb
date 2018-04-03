@@ -18,5 +18,8 @@ Rails.application.routes.draw do
   get '/document_owners/:id/edit' => 'documents#edit_reminder'
   patch '/document_owners/:id/update' => 'documents#update_reminder'
 
+  get '/get_personas' => 'documents#get_personas'
+  get '/get_email' => 'documents#get_email'
+
 
 end

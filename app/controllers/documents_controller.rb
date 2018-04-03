@@ -113,6 +113,20 @@ class DocumentsController < ApplicationController
 
   end
 
+  def get_personas
+    personas = {}
+    Persona.all.each do |persona|
+         personas[persona.nombre.split.map(&:capitalize).join(' ')] = persona.cuenta_cimav.blank? ? nil: "http://cimav.edu.mx/foto/#{persona.cuenta_cimav}"
+    end
+    render json: personas
+  end
+
+  def get_email
+    persona = Persona.find_by_nombre(params[:nombre])
+    email = persona.cuenta_cimav.blank? ? nil:"#{persona.cuenta_cimav.downcase}@cimav.edu.mx"
+    render plain: email
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_document
