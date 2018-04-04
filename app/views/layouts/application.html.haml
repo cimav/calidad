@@ -14,12 +14,12 @@
         .user-view
           .background
             = image_tag "cimav1.png"
-          %a{:href => "#!user"}
-            %img.circle{:src => "http://cimav.edu.mx/foto/paulina.sandoval/500"}/
-          %a{:href => "#!name"}
+          %a
+            %img.circle{:src => "http://cimav.edu.mx/foto/#{current_user.email.split('@')[0]}/500"}/
+          %a
             %span.white-text.name
               =current_user.name
-          %a{:href => "#!email"}
+          %a
             %span.white-text.email
               =current_user.email
       %li
