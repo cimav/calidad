@@ -35,7 +35,8 @@
 #new_document_modal.modal
   .modal-content
     %h4.center Nuevo documento
-    =render partial: 'form', locals:{document:Document.new, department:@department}
+    =render partial: 'form', locals:{document:Document.new, department:@department, screen:'new'}
+
 
 #edit_document_modal.modal
   .modal-content
