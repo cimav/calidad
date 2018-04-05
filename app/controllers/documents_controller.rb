@@ -17,6 +17,10 @@ class DocumentsController < ApplicationController
   def index_by_department
     @department = Department.find_by_name(params[:department_name])
     @documents = @department.documents
+    respond_to do |format|
+      format.html
+      format.xls
+    end
   end
 
   # GET /documents/new

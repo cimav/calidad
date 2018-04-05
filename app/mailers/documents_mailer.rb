@@ -11,7 +11,7 @@ class DocumentsMailer < ApplicationMailer
 
     @from = "Notificaciones CIMAV <notificaciones@cimav.edu.mx>"
     mail(to: @document_owner.owner_email, :from => @from, subject: '(CALIDAD) Su documento expirará en dos semanas')
-  end
+  end 
 
   def one_week_reminder(document_owner)
     @document_owner = document_owner

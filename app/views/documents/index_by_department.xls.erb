@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="s1">
+      <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000" ss:Bold="1"/>
+      <Alignment ss:Vertical="Center" ss:Horizontal="Center"/>
+      <Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+    </Style>
+    <Style ss:ID="s2">
+      <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="10"/>
+      <Alignment ss:Vertical="Center" ss:Horizontal="Right"/>
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Column ss:AutoFitWidth="0" ss:Width="50"/>
+      <Column ss:AutoFitWidth="0" ss:Width="250"/>
+      <Column ss:AutoFitWidth="0" ss:Width="100"/>
+      <Column ss:AutoFitWidth="0" ss:Width="90"/>
+      <Column ss:AutoFitWidth="0" ss:Width="200"/>
+      <Row>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">Id</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">Nombre</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">Código</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">Revisión</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">Fecha de revisión</Data></Cell>
+      </Row>
+      <% @documents.each do |document| %>
+        <Row>
+          <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= document.id %></Data></Cell>
+          <Cell ss:StyleID="s2"><Data ss:Type="String"><%= document.name %></Data></Cell>
+          <Cell ss:StyleID="s2"><Data ss:Type="String"><%= document.code %></Data></Cell>
+          <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= document.revision %></Data></Cell>
+          <Cell ss:StyleID="s2"><Data ss:Type="Date"><%= document.revision_date%></Data></Cell>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
