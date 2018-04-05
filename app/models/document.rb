@@ -1,6 +1,6 @@
 class Document < ApplicationRecord
   belongs_to :department
-  has_many :document_owners
+  has_many :document_owners, dependent: :destroy
 
   MASTER_LIST = 1
   PROCEDURE = 2

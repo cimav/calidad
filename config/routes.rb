@@ -15,11 +15,14 @@ Rails.application.routes.draw do
   get '/documents/:id/new_reminder' => 'documents#new_reminder'
   post '/documents/:id/create_reminder' => 'documents#create_reminder'
 
+  ########################################## Recordatorios
   get '/document_owners/:id/edit' => 'documents#edit_reminder'
   patch '/document_owners/:id/update' => 'documents#update_reminder'
+  delete '/delete_reminder/:id' => 'documents#delete_reminder'
 
   get '/get_personas' => 'documents#get_personas'
   get '/get_email' => 'documents#get_email'
+
 
 
 end
