@@ -22,12 +22,14 @@
       <Column ss:AutoFitWidth="0" ss:Width="100"/>
       <Column ss:AutoFitWidth="0" ss:Width="90"/>
       <Column ss:AutoFitWidth="0" ss:Width="200"/>
+      <Column ss:AutoFitWidth="0" ss:Width="150"/>
       <Row>
         <Cell ss:StyleID="s1"><Data ss:Type="String">Id</Data></Cell>
         <Cell ss:StyleID="s1"><Data ss:Type="String">Nombre</Data></Cell>
         <Cell ss:StyleID="s1"><Data ss:Type="String">Código</Data></Cell>
         <Cell ss:StyleID="s1"><Data ss:Type="String">Revisión</Data></Cell>
         <Cell ss:StyleID="s1"><Data ss:Type="String">Fecha de revisión</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">Departamento</Data></Cell>
       </Row>
       <% @documents.each do |document| %>
         <Row>
@@ -36,6 +38,7 @@
           <Cell ss:StyleID="s2"><Data ss:Type="String"><%= document.code %></Data></Cell>
           <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= document.revision %></Data></Cell>
           <Cell ss:StyleID="s2"><Data ss:Type="Date"><%= document.revision_date%></Data></Cell>
+          <Cell ss:StyleID="s2"><Data ss:Type="String"><%= document.department.name%></Data></Cell>
         </Row>
       <% end %>
     </Table>

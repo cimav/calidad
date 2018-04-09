@@ -1,8 +1,9 @@
 %h3
   =@department.name
-  %button.btn-floating.right.green.darken-2.tooltipped{'data-tooltip':'Nuevo documento','data-delay':40,'data-position':'right',onclick:"openModal($('#new_document_modal'));"}
-    %i.material-icons
-      add
+  .right
+    %button.btn-floating.green.darken-2.tooltipped{'data-tooltip':'Nuevo documento','data-delay':40,'data-position':'right',onclick:"openModal($('#new_document_modal'));"}
+      %i.material-icons
+        add
 .row
   -@documents.each do |document|
 
@@ -30,8 +31,9 @@
               %i.material-icons.tooltipped.brown-text.text-lighten-3.pointer-cursor{'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
                 notifications
 
+= link_to  "/#{@department.name.downcase}/documentos.xls", class:'btn-floating grey lighten-5' do
+  %i.fas.fa-file-excel.green-text.text-darken-3
 
-= link_to "Excel", "/#{@department.name.downcase}/documentos.xls"
 #new_document_modal.modal
   .modal-content
     %h4.center Nuevo documento
