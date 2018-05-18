@@ -28,17 +28,17 @@
         .col.s12.reminders
           -if document.document_owners.size > 0
             -document.document_owners.each do |document_owner|
-              %i.material-icons.tooltipped.brown-text.text-lighten-3.pointer-cursor{'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
-                notifications
+              %img.pointer-cursor.circle.tooltipped{src:"http://cimav.edu.mx/foto/#{document_owner.owner_email.split('@')[0]}/40", 'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
 
-= link_to  "/#{@department.name.downcase}/documentos.xls", class:'btn-floating grey lighten-5' do
-  %i.fas.fa-file-excel.green-text.text-darken-3
+
 
 #new_document_modal.modal
   .modal-content
     %h4.center Nuevo documento
     =render partial: 'form', locals:{document:Document.new, department:@department, screen:'new'}
-
+.fixed-action-btn
+  = link_to  "/#{@department.name.downcase}/documentos.xls", class:'btn-floating grey lighten-5 tooltipped', 'data-tooltip':'Exportar a excel', 'data-position':'left' do
+    %i.fas.fa-file-excel.green-text.text-darken-3
 
 #edit_document_modal.modal
   .modal-content
