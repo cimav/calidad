@@ -29,7 +29,6 @@
       -Department.all.each do |department|
         %li{class:"#{active_class(department.name.downcase)}"}
           %a.waves-effect{:href => "/#{department.name.downcase}/documentos"}
-            %i.material-icons> work
             =department.name
       %li
         .divider
