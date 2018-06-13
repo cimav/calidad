@@ -49,8 +49,9 @@ test:
 #
 production:
   <<: *default
+  host: fermi.cimav.edu.mx
   database: calidad_production
-  username: calidad
+  username: admin
   password: <%= ENV['CALIDAD_DATABASE_PASSWORD'] %>
 
 production_cimavnetmultix:
