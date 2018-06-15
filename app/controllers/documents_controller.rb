@@ -136,7 +136,7 @@ class DocumentsController < ApplicationController
   def get_personas
     personas = {}
     Persona.all.each do |persona|
-      personas[persona.nombre.split.map(&:capitalize).join(' ')] = persona.cuenta_cimav.blank? ? nil : "http://cimav.edu.mx/foto/#{persona.cuenta_cimav}"
+      personas[persona.nombre.split.map(&:capitalize).join(' ')] = persona.cuenta_cimav.blank? ? 'http://cimav.edu.mx/foto/default' : "http://cimav.edu.mx/foto/#{persona.cuenta_cimav}"
     end
     render json: personas
   end
