@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_create :set_hidden_params
+  audited
 
   ACTIVE = 1
   DELETED = 99
