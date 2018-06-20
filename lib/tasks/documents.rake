@@ -8,7 +8,7 @@ task :reminder => :environment do
     if document.document_owners.size > 0
       document.document_owners.each do |document_owner|
         DocumentsMailer.one_month_reminder(document_owner).deliver_later
-        puts "(Aviso de 1 mes) Se notificará a #{document_owner.owner_email} sobre el documento [#{document.name} | #{document.code}-#{document.revision}]"
+        puts "(Aviso de 1 mes) Se notificará a #{document_owner.owner_email} sobre el documento [#{document.name} | #{document.code}-#{document.revision_number}]"
       end
     end
   end
@@ -19,7 +19,7 @@ task :reminder => :environment do
     if document.document_owners.size > 0
       document.document_owners.each do |document_owner|
         DocumentsMailer.two_weeks_reminder(document_owner).deliver_later
-        puts "(Aviso de 2 semanas) Se notificará a #{document_owner.owner_email} sobre el documento [#{document.name} | #{document.code}-#{document.revision}]"
+        puts "(Aviso de 2 semanas) Se notificará a #{document_owner.owner_email} sobre el documento [#{document.name} | #{document.code}-#{document.revision_number}]"
       end
     end
   end
@@ -31,7 +31,7 @@ task :reminder => :environment do
     if document.document_owners.size > 0
       document.document_owners.each do |document_owner|
         DocumentsMailer.one_week_reminder(document_owner).deliver_later
-        puts "(Aviso de 1 semana) Se notificará a #{document_owner.owner_email} sobre el documento [#{document.name} | #{document.code}-#{document.revision}]"
+        puts "(Aviso de 1 semana) Se notificará a #{document_owner.owner_email} sobre el documento [#{document.name} | #{document.code}-#{document.revision_number}]"
       end
     end
   end
@@ -42,7 +42,7 @@ task :reminder => :environment do
     if document.document_owners.size > 0
       document.document_owners.each do |document_owner|
         DocumentsMailer.expire_reminder(document_owner).deliver_later
-        puts "(Aviso de expirado) Se notificará a #{document_owner.owner_email} sobre el documento [#{document.name} | #{document.code}-#{document.revision}]"
+        puts "(Aviso de expirado) Se notificará a #{document_owner.owner_email} sobre el documento [#{document.name} | #{document.code}-#{document.revision_number}]"
       end
     end
   end
