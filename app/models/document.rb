@@ -3,15 +3,23 @@ class Document < ApplicationRecord
   has_many :document_owners, dependent: :destroy
   audited
 
-  MASTER_LIST = 1
-  PROCEDURE = 2
-  QUALITY_POLITICS = 3
+  PROCEDURE = 1
+  FORMAT = 2
+  INSTRUCTION_SHEET = 3
+  DATABASE = 4
+  MANUAL = 5
+  POLITICS = 6
+  PLAN = 7
 
 
   DOCUMENT_TYPES ={
-      MASTER_LIST => 'Listado maestro',
       PROCEDURE => 'Procedimiento',
-      QUALITY_POLITICS => 'Política de calidad'
+      FORMAT => 'Formato',
+      INSTRUCTION_SHEET => 'Hoja de instrucción',
+      DATABASE => 'Base de datos',
+      MANUAL => 'Manual',
+      POLITICS => 'Política',
+      PLAN => 'Plan',
   }
 
   def get_document_type
