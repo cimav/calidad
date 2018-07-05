@@ -1,9 +1,12 @@
-%h3
+%h3{style:'margin-bottom: 0;'}
   =@department.name
   .right
     %button.btn-floating.green.darken-2.tooltipped{'data-tooltip':'Nuevo documento','data-delay':40,'data-position':'right',onclick:"openModal($('#new_document_modal'));"}
       %i.material-icons
         add
+%p.grey-text{style:'margin-top: 0; margin-bottom: 2rem;'}
+  Responsable:
+  = @department.manager_name.blank? ? 'Sin definir' : @department.manager_name
 .row
   -@documents.each do |document|
 
@@ -32,13 +35,24 @@
 
 
 
+
+
+.fixed-action-btn
+  %a.btn-floating.blue.btn-large
+    %i.fas.fa-file-download
+  %ul
+    %li
+      = link_to  "/#{@department.name.downcase}/documentos.xls", class:'btn-floating grey lighten-5 tooltipped', 'data-tooltip':'Exportar a excel', 'data-position':'left', 'data-delay':30 do
+        %i.fas.fa-file-excel.green-text.text-darken-3
+    %li
+      %button.btn-floating.grey.lighten-5.tooltipped{'data-tooltip':'Listado maestro', 'data-position':'left', 'data-delay':30, onclick:"openModal($('#master_list_modal'));"}
+        %i.fas.fa-file-pdf.red-text.text-darken-3
+
 #new_document_modal.modal
   .modal-content
     %h4.center Nuevo documento
     =render partial: 'form', locals:{document:Document.new, department:@department, screen:'new'}
-.fixed-action-btn
-  = link_to  "/#{@department.name.downcase}/documentos.xls", class:'btn-floating grey lighten-5 tooltipped', 'data-tooltip':'Exportar a excel', 'data-position':'left' do
-    %i.fas.fa-file-excel.green-text.text-darken-3
+
 
 #edit_document_modal.modal
   .modal-content
@@ -84,6 +98,11 @@
             .circle
 
     #edit_reminder_content
+
+#master_list_modal.modal
+  .modal-content
+    %h4.center Imprimir listado maestro
+    =render partial: 'master_list_form', locals:{department_id:@department.id}
 
 :javascript
    $(document).ready(function(){

@@ -6,7 +6,7 @@ class CreateDocuments < ActiveRecord::Migration[5.1]
       t.string :revision
       t.date :revision_date
       t.integer :document_type
-      t.references :department, foreign_key: true
+      t.references :department, foreign_key: false
 
       t.timestamps
     end

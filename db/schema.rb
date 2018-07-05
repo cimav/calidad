@@ -73,5 +73,4 @@ ActiveRecord::Schema.define(version: 20180615225803) do
   end
 
   add_foreign_key "document_owners", "documents"
-  add_foreign_key "documents", "departments"
 end
