@@ -1,0 +1,6 @@
+=form_tag("/master_list/#{department_id}", target:'_blank', method: 'GET') do
+  .row
+    =select_tag :document_type, options_for_select(Document::DOCUMENT_TYPES.invert)
+  .row
+    %button.btn-floating.purple.right{type:'submit', value:'submit'}
+      %i.material-icons print

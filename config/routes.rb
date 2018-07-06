@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/:department_name/documentos' => 'documents#index_by_department'
   get '/documents/:id/new_reminder' => 'documents#new_reminder'
   post '/documents/:id/create_reminder' => 'documents#create_reminder'
+  get '/master_list/:department_id' => 'documents#master_list'
 
   ########################################## Recordatorios
   get '/document_owners/:id/edit' => 'documents#edit_reminder'

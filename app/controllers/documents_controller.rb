@@ -147,6 +147,40 @@ class DocumentsController < ApplicationController
     render plain: email
   end
 
+  def master_list
+    department = Department.find(params[:department_id])
+    document_type = params[:document_type].to_i
+    background = "#{Rails.root.to_s}/app/assets/images/hoja_membretada_lm.png"
+    pdf = Prawn::Document.new(left_margin: 50,right_margin: 50, background: background, background_scale: 0.20, top_margin: 175, bottom_margin: 40)
+    cimav_logo = "#{Rails.root}/app/assets/images/logo_cimav_crop.png"
+    documents = department.documents.where(document_type:document_type)
+    date = documents.order(:revision_date).last.revision_date rescue ''
+
+    title_table = pdf.make_table([['', '<b>LISTADO MAESTRO</b>']], cell_style: {inline_format: true, align: :center, valign: :center,height:50, size: 20}, column_widths:[120,380]) #celda vacia para imagen
+    date_table = pdf.make_table([["Fecha: #{date}"],["Responsable: #{department.manager_name rescue 'Sin definir'}"]], width:250, cell_style: {font_style: :bold, size:11})
+    second_table = pdf.make_table([["De: #{Document::DOCUMENT_TYPES[document_type]}", date_table]], cell_style: {font_style: :bold, size:11}, column_widths:[250,250]) #celda de tipo de documento
+    third_table = pdf.make_table([['Documento', 'Código', 'Revisión', 'Efectivo']], cell_style: {font_style: :bold, align: :center},  column_widths:[250,83.3,83.3,83.3]) #celda de tipo de documento
+
+    pdf.repeat :all do
+      # header
+      pdf.canvas do
+        pdf.bounding_box [pdf.bounds.left + 50, pdf.bounds.top - 36] , :width  => pdf.bounds.width do
+          pdf.table([[title_table],[second_table],[third_table]], cell_style: {inline_format: true}) # Tabla cabecera
+        end
+      end
+
+
+    end
+    data_table = []
+    documents.each_with_index {|document, index| data_table.push [document.name,document.code,document.revision_number,document.revision_date]}
+    pdf.move_down 20
+    pdf.table(data_table, column_widths:[250,83.3,83.3,83.3], cell_style:{size:10}) if !data_table.blank?
+
+    pdf.number_pages 'Responsable del formato: CGC                              Página <page> de <total>                              Formato: CA01F04-05',  at: [pdf.bounds.left + 20, 0], size:10
+
+    send_data pdf.render, filename: "listado-maestro.pdf", type: 'application/pdf', disposition: 'inline'
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_document
@@ -157,4 +191,5 @@ class DocumentsController < ApplicationController
   def document_params
     params.require(:document).permit(:name, :code, :revision_number, :revision_date, :document_type, :department_id)
   end
+
 end
