@@ -1,40 +1,291 @@
 %h3{style:'margin-bottom: 0;'}
   =@department.name
+
+%p.grey-text{style:'margin-top: 0; margin-bottom: 2rem;'}
+  Responsable:
+  = @department.manager_name.blank? ? 'Sin definir' : @department.manager_name
+  %i.material-icons.clickable-icon.inline.tooltipped{'data-tooltip':'Editar departamento','data-delay':40,'data-position':'right',onclick:"openModal($('#edit_department_modal'));"}
+    edit
+.row
   .right
     %button.btn-floating.green.darken-2.tooltipped{'data-tooltip':'Nuevo documento','data-delay':40,'data-position':'right',onclick:"openModal($('#new_document_modal'));"}
       %i.material-icons
         add
-%p.grey-text{style:'margin-top: 0; margin-bottom: 2rem;'}
-  Responsable:
-  = @department.manager_name.blank? ? 'Sin definir' : @department.manager_name
 .row
-  -@documents.each do |document|
-
-    .card-panel.documents-list
-      .row
-        .col.s5.m2.match-height
-          %i.material-icons.large.grey-text
-            insert_drive_file
-        .col.s7.m7.match-height
-          =document.name
-          %br
-          ="#{document.code}-#{document.revision_number}"
-          %br
-          =document.revision_date
-        .col.s12.m3.match-height
-          %a.btn-floating.grey.right.blue-hover{onclick:"openEditModal(#{document.id});"}
-            %i.material-icons
-              edit
-          %a.btn-floating.grey.right.purple-hover{onclick:"openNewReminderModal(#{document.id});"}
-            %i.material-icons
-              add_alert
-        .col.s12.reminders
-          -if document.document_owners.size > 0
-            -document.document_owners.each do |document_owner|
-              %img.pointer-cursor.circle.tooltipped{src:"http://cimav.edu.mx/foto/#{document_owner.owner_email.split('@')[0]}/40", 'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
-
-
-
+  %ul.collapsible.white{"data-collapsible" => "accordion"}
+    -########################################################################### Procedimientos
+    -if @documents.where(document_type: Document::PROCEDURE).size >1
+      %li
+        .collapsible-header
+          %i.material-icons> linear_scale
+          Procedimientos
+          %span.badge
+            =@documents.where(document_type: Document::PROCEDURE).size
+        .collapsible-body
+          %table.striped
+            %th
+              Nombre
+            %th
+              Cod / rev
+            %th
+              Fecha
+            %th
+              Recordatorios
+            %th
+              Acciones
+            -@documents.where(document_type: Document::PROCEDURE).each do |document|
+              %tr
+                %td
+                  =document.name
+                %td
+                  ="#{document.code} / #{document.revision_number}"
+                %td
+                  =document.revision_date
+                %td
+                  -if document.document_owners.size > 0
+                    -document.document_owners.each do |document_owner|
+                      %img.pointer-cursor.circle.tooltipped{src:"http://cimav.edu.mx/foto/#{document_owner.owner_email.split('@')[0]}/40", 'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
+                %td
+                  %a.btn-floating.grey.right.blue-hover{onclick:"openEditModal(#{document.id});"}
+                    %i.material-icons
+                      edit
+                  %a.btn-floating.grey.right.purple-hover{onclick:"openNewReminderModal(#{document.id});"}
+                    %i.material-icons
+                      add_alert
+    -########################################################################### Formatos
+    -if @documents.where(document_type: Document::FORMAT).size >1
+      %li
+        .collapsible-header
+          %i.material-icons> content_paste
+          Formatos
+          %span.badge
+            =@documents.where(document_type: Document::FORMAT).size
+        .collapsible-body
+          %table.striped
+            %th
+              Nombre
+            %th
+              Cod / rev
+            %th
+              Fecha
+            %th
+              Recordatorios
+            %th
+              Acciones
+            -@documents.where(document_type: Document::FORMAT).each do |document|
+              %tr
+                %td
+                  =document.name
+                %td
+                  ="#{document.code} / #{document.revision_number}"
+                %td
+                  =document.revision_date
+                %td
+                  -if document.document_owners.size > 0
+                    -document.document_owners.each do |document_owner|
+                      %img.pointer-cursor.circle.tooltipped{src:"http://cimav.edu.mx/foto/#{document_owner.owner_email.split('@')[0]}/40", 'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
+                %td
+                  %a.btn-floating.grey.right.blue-hover{onclick:"openEditModal(#{document.id});"}
+                    %i.material-icons
+                      edit
+                  %a.btn-floating.grey.right.purple-hover{onclick:"openNewReminderModal(#{document.id});"}
+                    %i.material-icons
+                      add_alert
+    -########################################################################### Hojas de instrucción
+    -if @documents.where(document_type: Document::INSTRUCTION_SHEET).size >1
+      %li
+        .collapsible-header
+          %i.material-icons> description
+          Hojas de intrucción
+          %span.badge
+            =@documents.where(document_type: Document::INSTRUCTION_SHEET).size
+        .collapsible-body
+          %table.striped
+            %th
+              Nombre
+            %th
+              Cod / rev
+            %th
+              Fecha
+            %th
+              Recordatorios
+            %th
+              Acciones
+            -@documents.where(document_type: Document::INSTRUCTION_SHEET).each do |document|
+              %tr
+                %td
+                  =document.name
+                %td
+                  ="#{document.code} / #{document.revision_number}"
+                %td
+                  =document.revision_date
+                %td
+                  -if document.document_owners.size > 0
+                    -document.document_owners.each do |document_owner|
+                      %img.pointer-cursor.circle.tooltipped{src:"http://cimav.edu.mx/foto/#{document_owner.owner_email.split('@')[0]}/40", 'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
+                %td
+                  %a.btn-floating.grey.right.blue-hover{onclick:"openEditModal(#{document.id});"}
+                    %i.material-icons
+                      edit
+                  %a.btn-floating.grey.right.purple-hover{onclick:"openNewReminderModal(#{document.id});"}
+                    %i.material-icons
+                      add_alert
+    -########################################################################### Bases de datos
+    -if @documents.where(document_type: Document::DATABASE).size >1
+      %li
+        .collapsible-header
+          %i.material-icons> storage
+          Bases de datos
+          %span.badge
+            =@documents.where(document_type: Document::DATABASE).size
+        .collapsible-body
+          %table.striped
+            %th
+              Nombre
+            %th
+              Cod / rev
+            %th
+              Fecha
+            %th
+              Recordatorios
+            %th
+              Acciones
+            -@documents.where(document_type: Document::DATABASE).each do |document|
+              %tr
+                %td
+                  =document.name
+                %td
+                  ="#{document.code} / #{document.revision_number}"
+                %td
+                  =document.revision_date
+                %td
+                  -if document.document_owners.size > 0
+                    -document.document_owners.each do |document_owner|
+                      %img.pointer-cursor.circle.tooltipped{src:"http://cimav.edu.mx/foto/#{document_owner.owner_email.split('@')[0]}/40", 'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
+                %td
+                  %a.btn-floating.grey.right.blue-hover{onclick:"openEditModal(#{document.id});"}
+                    %i.material-icons
+                      edit
+                  %a.btn-floating.grey.right.purple-hover{onclick:"openNewReminderModal(#{document.id});"}
+                    %i.material-icons
+                      add_alert
+    -########################################################################### Manuales
+    -if @documents.where(document_type: Document::MANUAL).size >1
+      %li
+        .collapsible-header
+          %i.material-icons> assignment
+          Manuales
+          %span.badge
+            =@documents.where(document_type: Document::MANUAL).size
+        .collapsible-body
+          %table.striped
+            %th
+              Nombre
+            %th
+              Cod / rev
+            %th
+              Fecha
+            %th
+              Recordatorios
+            %th
+              Acciones
+            -@documents.where(document_type: Document::MANUAL).each do |document|
+              %tr
+                %td
+                  =document.name
+                %td
+                  ="#{document.code} / #{document.revision_number}"
+                %td
+                  =document.revision_date
+                %td
+                  -if document.document_owners.size > 0
+                    -document.document_owners.each do |document_owner|
+                      %img.pointer-cursor.circle.tooltipped{src:"http://cimav.edu.mx/foto/#{document_owner.owner_email.split('@')[0]}/40", 'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
+                %td
+                  %a.btn-floating.grey.right.blue-hover{onclick:"openEditModal(#{document.id});"}
+                    %i.material-icons
+                      edit
+                  %a.btn-floating.grey.right.purple-hover{onclick:"openNewReminderModal(#{document.id});"}
+                    %i.material-icons
+                      add_alert
+    -########################################################################### Políticas
+    -if @documents.where(document_type: Document::POLITICS).size >1
+      %li
+        .collapsible-header
+          %i.material-icons> beenhere
+          Políticas
+          %span.badge
+            =@documents.where(document_type: Document::POLITICS).size
+        .collapsible-body
+          %table.striped
+            %th
+              Nombre
+            %th
+              Cod / rev
+            %th
+              Fecha
+            %th
+              Recordatorios
+            %th
+              Acciones
+            -@documents.where(document_type: Document::POLITICS).each do |document|
+              %tr
+                %td
+                  =document.name
+                %td
+                  ="#{document.code} / #{document.revision_number}"
+                %td
+                  =document.revision_date
+                %td
+                  -if document.document_owners.size > 0
+                    -document.document_owners.each do |document_owner|
+                      %img.pointer-cursor.circle.tooltipped{src:"http://cimav.edu.mx/foto/#{document_owner.owner_email.split('@')[0]}/40", 'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
+                %td
+                  %a.btn-floating.grey.right.blue-hover{onclick:"openEditModal(#{document.id});"}
+                    %i.material-icons
+                      edit
+                  %a.btn-floating.grey.right.purple-hover{onclick:"openNewReminderModal(#{document.id});"}
+                    %i.material-icons
+                      add_alert
+    -########################################################################### Planes
+    -if @documents.where(document_type: Document::PLAN).size >1
+      %li
+        .collapsible-header
+          %i.material-icons> language
+          Planes
+          %span.badge
+            =@documents.where(document_type: Document::PLAN).size
+        .collapsible-body
+          %table.striped
+            %th
+              Nombre
+            %th
+              Cod / rev
+            %th
+              Fecha
+            %th
+              Recordatorios
+            %th
+              Acciones
+            -@documents.where(document_type: Document::PLAN).each do |document|
+              %tr
+                %td
+                  =document.name
+                %td
+                  ="#{document.code} / #{document.revision_number}"
+                %td
+                  =document.revision_date
+                %td
+                  -if document.document_owners.size > 0
+                    -document.document_owners.each do |document_owner|
+                      %img.pointer-cursor.circle.tooltipped{src:"http://cimav.edu.mx/foto/#{document_owner.owner_email.split('@')[0]}/40", 'data-tooltip':"#{document_owner.owner_name}",'data-delay':40,'data-position':'bottom', onclick:"openEditReminderModal(#{document_owner.id});"}
+                %td
+                  %a.btn-floating.grey.right.blue-hover{onclick:"openEditModal(#{document.id});"}
+                    %i.material-icons
+                      edit
+                  %a.btn-floating.grey.right.purple-hover{onclick:"openNewReminderModal(#{document.id});"}
+                    %i.material-icons
+                      add_alert
 
 
 .fixed-action-btn
@@ -52,6 +303,11 @@
   .modal-content
     %h4.center Nuevo documento
     =render partial: 'form', locals:{document:Document.new, department:@department, screen:'new'}
+
+#edit_department_modal.modal
+  .modal-content
+    %h4.center Editar departamento
+    =render partial: 'edit_department', locals:{department:@department, screen:'new'}
 
 
 #edit_document_modal.modal

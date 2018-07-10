@@ -93,3 +93,14 @@ header, main, footer {
 .side-nav li a{
   font-size: 90% !important;
 }
+
+.clickable-icon{
+  &:hover {
+    cursor: pointer;
+    color: #00b0ff;
+  }
+}
+
+.material-icons.inline {
+    vertical-align: middle !important;
+}

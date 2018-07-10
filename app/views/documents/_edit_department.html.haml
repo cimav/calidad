@@ -1,0 +1,14 @@
+.row
+  = form_for department, url:"/update_department/#{department.id}" do |f|
+
+    .row
+      .input-field.col.s12.m6
+        = f.label :name, 'Nombre'
+        = f.text_field :name
+      .input-field.col.s12.m6
+        = f.label :manager_name, 'Revisión'
+        = f.text_field :manager_name
+
+    .row
+      .col.s12
+        =f.submit 'Guardar', class:'btn btn-large purple'

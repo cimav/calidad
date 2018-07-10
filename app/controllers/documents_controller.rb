@@ -181,6 +181,21 @@ class DocumentsController < ApplicationController
     send_data pdf.render, filename: "listado-maestro.pdf", type: 'application/pdf', disposition: 'inline'
   end
 
+  def update_department
+    department = Department.find(params[:department_id])
+    department.name = params[:department][:name]
+    department.manager_name = params[:department][:manager_name]
+    respond_to do |format|
+      if department.save
+        format.html {redirect_to "/#{department.name.downcase}/documentos", notice: 'Departamento actualizado'}
+        format.json {render :show, status: :ok, location: @document}
+      else
+        format.html {redirect_to "/#{department.name.downcase}/documentos", notice: 'Error al actualizar departamento'}
+        format.json {render json: @document.errors, status: :unprocessable_entity}
+      end
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_document

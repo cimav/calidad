@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   patch '/document_owners/:id/update' => 'documents#update_reminder'
   delete '/delete_reminder/:id' => 'documents#delete_reminder'
 
+  ########################################## Departamentos
+  patch '/update_department/:department_id' => 'documents#update_department'
+
+
   get '/get_personas' => 'documents#get_personas'
   get '/get_email' => 'documents#get_email'
 
