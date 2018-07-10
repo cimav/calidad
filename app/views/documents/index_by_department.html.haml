@@ -362,11 +362,5 @@
 
 :javascript
    $(document).ready(function(){
-  ///////////////////////////// Función para hacer todos los divs del mismo tamaño
-      $('.match-height').matchHeight({
-          byRow: true,
-          property: 'height',
-          target: null,
-          remove: false
-      });
-    });
+      Turbolinks.clearCache()
+   });
