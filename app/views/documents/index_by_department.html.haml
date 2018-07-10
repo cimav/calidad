@@ -14,7 +14,7 @@
 .row
   %ul.collapsible.white{"data-collapsible" => "accordion"}
     -########################################################################### Procedimientos
-    -if @documents.where(document_type: Document::PROCEDURE).size >1
+    -if @documents.where(document_type: Document::PROCEDURE).size > 0
       %li
         .collapsible-header
           %i.material-icons> linear_scale
@@ -26,7 +26,7 @@
             %th
               Nombre
             %th
-              Cod - rev
+              Cod-rev
             %th
               Fecha
             %th
@@ -53,7 +53,7 @@
                     %i.material-icons
                       add_alert
     -########################################################################### Formatos
-    -if @documents.where(document_type: Document::FORMAT).size >1
+    -if @documents.where(document_type: Document::FORMAT).size > 0
       %li
         .collapsible-header
           %i.material-icons> content_paste
@@ -92,7 +92,7 @@
                     %i.material-icons
                       add_alert
     -########################################################################### Hojas de instrucción
-    -if @documents.where(document_type: Document::INSTRUCTION_SHEET).size >1
+    -if @documents.where(document_type: Document::INSTRUCTION_SHEET).size > 0
       %li
         .collapsible-header
           %i.material-icons> description
@@ -131,7 +131,7 @@
                     %i.material-icons
                       add_alert
     -########################################################################### Bases de datos
-    -if @documents.where(document_type: Document::DATABASE).size >1
+    -if @documents.where(document_type: Document::DATABASE).size > 0
       %li
         .collapsible-header
           %i.material-icons> storage
@@ -170,7 +170,7 @@
                     %i.material-icons
                       add_alert
     -########################################################################### Manuales
-    -if @documents.where(document_type: Document::MANUAL).size >1
+    -if @documents.where(document_type: Document::MANUAL).size > 0
       %li
         .collapsible-header
           %i.material-icons> assignment
@@ -209,7 +209,7 @@
                     %i.material-icons
                       add_alert
     -########################################################################### Políticas
-    -if @documents.where(document_type: Document::POLITICS).size >1
+    -if @documents.where(document_type: Document::POLITICS).size > 0
       %li
         .collapsible-header
           %i.material-icons> beenhere
@@ -248,7 +248,7 @@
                     %i.material-icons
                       add_alert
     -########################################################################### Planes
-    -if @documents.where(document_type: Document::PLAN).size >1
+    -if @documents.where(document_type: Document::PLAN).size > 0
       %li
         .collapsible-header
           %i.material-icons> language
